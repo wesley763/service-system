@@ -8,7 +8,6 @@ if (isset($_POST['submit'])) {
     $categoria_idcategoria = $_POST['categoria'];
     $descricao = $_POST['descricao'];
     $valor = $_POST['valor'];
-    $foto = $_POST["foto"];
    
     // Verificar se o usuário está logado
     if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
@@ -29,16 +28,34 @@ if (isset($_POST['submit'])) {
         $idServidor = null;
     }
 
-    // Inserir os dados do serviço na tabela "servico"
-    $query = "INSERT INTO servico (nome, descricao, valor, foto, categoria_idcategoria, servidores_idservidores) 
-              VALUES ('$nome', '$descricao', '$valor', '$foto', '$categoria_idcategoria', '$idServidor')";
-    $result = mysqli_query($conexao, $query);
+    // Upload da foto
+    $foto = $_FILES['foto'];
 
-    if ($result) {
-        header('Location: paginaLogada.php');
-        exit();
+    // Verificar se um arquivo foi enviado
+    if ($foto['name']) {
+        $foto_nome = $foto['name'];
+        $foto_tmp = $foto['tmp_name'];
+        $foto_destino = 'img/' . $foto_nome;
+
+        // Mover o arquivo para a pasta de destino
+        if (move_uploaded_file($foto_tmp, $foto_destino)) {
+            // Inserir os dados do serviço na tabela "servico"
+            $query = "INSERT INTO servico (nome, descricao, valor, foto, categoria_idcategoria, servidores_idservidores) 
+                    VALUES ('$nome', '$descricao', '$valor', '$foto_destino', '$categoria_idcategoria', '$idServidor')";
+            $result = mysqli_query($conexao, $query);
+
+            if ($result) {
+                header('Location: paginaLogada.php');
+                exit();
+            } else {
+                echo "Ocorreu um erro ao cadastrar o serviço.";
+            }
+        } else {
+            echo "Erro ao enviar a foto. Verifique as permissões de escrita na pasta 'img'.";
+        }
     } else {
-        echo "Ocorreu um erro ao cadastrar o serviço.";
+        // Nenhum arquivo foi enviado
+        echo "Nenhuma foto foi selecionada.";
     }
 }
 
@@ -70,7 +87,7 @@ $categorias = mysqli_fetch_all($categorias_query, MYSQLI_ASSOC);
         <div class="container">
             <div class="form">
                 <h2>Cadastro de Serviços</h2>
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <!-- Campos de formulário -->
                     <div class="inputBox">
                         <input type="text" name="nome" placeholder="Serviço:">
@@ -90,7 +107,7 @@ $categorias = mysqli_fetch_all($categorias_query, MYSQLI_ASSOC);
                         <input type="text" name="descricao" placeholder="Descrição:" required>
                     </div>
                     <div class="inputBox">
-                        <input type="file" name="foto" accept="img/*" required>
+                        <input type="file" name="foto" accept="image/*" required>
                     </div>
                     <div class="inputBox">
                         <input type="submit" name="submit" value="CADASTRAR">

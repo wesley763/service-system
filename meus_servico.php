@@ -75,7 +75,19 @@
       font-size: 16px;
       transition: background-color 0.3s ease;
     }
-
+    .card1 button {
+      display: block;
+      text-align: center;
+      width: 100px;
+      padding: 10px;
+      background-color: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
     .card button:hover {
       background-color: #34B7F1;
     }
@@ -120,6 +132,14 @@
       justify-content: space-between;
       margin-top: 10px;
     }
+    .delete-button {
+      text-decoration: none;
+      background-color: red;
+      color: white;
+      text-align: center;
+      font-weight: 300;
+    }
+
   </style>
 </head>
 
@@ -166,15 +186,15 @@
     echo "<div id='container'>";
     while (($row2 = mysqli_fetch_assoc($resultado2))) {
       echo "<div class='card'>";
-      echo "<img src='img/foto.jpg' alt='img/foto.jpg'>";
+      echo "<img src='" . $row2['foto'] . "' alt='Imagem do serviço'>";
       echo "<div class='card-content'>";
       echo "<h3>Nome: " . $row2['nome'] . "</h3>";
       echo "<h3>Valor: " . $row2['valor'] . "</h3>";
       echo "<h3>Descrição: " . $row2['descricao'] . "</h3>";
       echo "<h3>Profissão: " . $teste[3] . "</h3>";
       echo "<div class='button-container'>";
-      echo "<button><a href='#' class='whatsapp-button'>Editar</a></button>";
-      echo "<button><a href='#' class='whatsapp-button'>Excluir</a></button>";
+      echo "<button><a href='editarServico.php?id=" . $row2['idservico'] . "' class='whatsapp-button'>Editar</a></button>";
+      echo "<button onclick='confirmDelete(" . $row2['idservico'] . ")' class='whatsapp-button delete-button'>Excluir</button>";
       echo "</div>";
       echo "</div>";
       echo "</div>";
@@ -191,6 +211,15 @@
 
   <!-- Adicione o link para a biblioteca Font Awesome -->
   <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
+
+  <script>
+    function confirmDelete(servicoId) {
+      if (confirm("Deseja excluir este serviço?")) {
+        // Redirecionar para o script de exclusão passando o ID do serviço
+        window.location.href = "excluirServico.php?id=" + servicoId;
+      }
+    }
+  </script>
 </body>
 
 </html>

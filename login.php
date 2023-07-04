@@ -124,6 +124,8 @@ $modal = '
                     ?>    
                         <!-- <p class="forget">Esqueceu a senha? <a href="#">Clique aqui</a></p> -->
                         <p class="forget">não tem conta?<a href="cadastro_servidor.php">inscrever-se</a></p>
+                        
+                        
                     </form>
                 </div>
             </div>

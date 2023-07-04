@@ -30,7 +30,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       width: 230px;
-      height: 450px;
+      height: 490px;
       border: 1px solid #ccc;
       border-radius: 5px;
       padding: 10px;
@@ -64,6 +64,7 @@
 
     .card button {
       display: block;
+      margin: 0 auto; /* Adiciona margem automática nas laterais para centralizar horizontalmente */
       text-align: center;
       width: 100px;
       padding: 10px;
@@ -113,6 +114,7 @@
       color: white;
       text-align: center;
       font-weight: 300;
+      border-bottom: none; /* Remover a linha abaixo do texto */
     }
 
     .button-container {
@@ -120,23 +122,32 @@
       justify-content: space-between;
       margin-top: 10px;
     }
+
+    .delete-button {
+      text-decoration: none;
+      background-color: red;
+      color: white;
+      text-align: center;
+      font-weight: 300;
+    }
+
   </style>
 </head>
 
 <body>
   <div class="search-container">
-    <input type="text" placeholder="Pesquisar...">
-    <div class="search-icon">
-      <i class="fas fa-search"></i>
-    </div>
+    <form method="GET" action="">
+      <input type="text" placeholder="Pesquisar..." name="search">
+      <div class="search-icon">
+        <i class="fas fa-search"></i>
+      </div>
+    </form>
   </div>
-
   <?php
   // Iniciar a sessão
   session_start();
 
   // Verificar se o servidor está logado na sessão
-  
 
   // Conexão com o banco de dados
   include_once('configuracao.php');
@@ -147,38 +158,38 @@
     exit();
   }
 
-  // Obter o ID do servidor logado na sessão
-  $id_servidor_logado = $_SESSION['servidores_idservidores'];
+  // Obter o valor da pesquisa do parâmetro GET
+  $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-  // Consulta SQL para recuperar os serviços do servidor logado
-  $sql = "SELECT * FROM servidores";
-  $sql2 = "SELECT * FROM servico";
-
-  $res=mysqli_query($conexao, $sql);
-  $teste=mysqli_fetch_array($res);
-
+  // Consulta SQL para recuperar os serviços com o nome da categoria e filtrar a pesquisa
+  $sql = "SELECT S.*, SV.nome as nome_servidor, SV.telefone, SV.profissao, C.nome as nome_categoria
+          FROM servico as S
+          JOIN servidores as SV ON S.servidores_idservidores = SV.idservidores
+          JOIN categoria as C ON S.categoria_idcategoria = C.idcategoria
+          WHERE S.nome LIKE '%$search%' OR S.descricao LIKE '%$search%'";
 
   $resultado = mysqli_query($conexao, $sql);
-  $resultado2 = mysqli_query($conexao, $sql2);
+
   // Verificar se a consulta retornou resultados
   if (mysqli_num_rows($resultado) > 0) {
-    $cont=0;
     // Loop para exibir os dados
     echo "<div id='container'>";
-    while (($row2 = mysqli_fetch_assoc($resultado2))) {
+    while ($row = mysqli_fetch_assoc($resultado)) {
       echo "<div class='card'>";
-      echo "<img src='img/foto.jpg' alt='img/foto.jpg'>";
+      echo "<img src='" . $row['foto'] . "' alt='Imagem do serviço'>";
       echo "<div class='card-content'>";
-      echo "<h3>Nome: " . $teste[1] . "</h3>";
-      echo "<h3>Valor: " . $row2['valor'] . "</h3>";
-      echo "<h3>Descrição: " . $row2['descricao'] . "</h3>";
-      echo "<h3>Profissão: " . $teste[3] . "</h3>";
+      echo "<h3>Servidor: " . substr($row['nome_servidor'], 0, 10) . "</h3>";
+      echo "<h3>Serviço: " . substr($row['nome'], 0, 10) . "</h3>";
+      echo "<h3>Categoria: " . substr($row['nome_categoria'], 0, 10) . "...</h3>";
+      echo "<h3>Telefone: " . substr($row['telefone'], 0, 10) . "</h3>";
+      echo "<h3>Valor: R$" . substr($row['valor'], 0, 10) . "</h3>";
+      echo "<h3>Descrição: " . substr($row['descricao'], 0, 10) . "</h3>";
+      echo "<h3>Profissão: " . substr($row['profissao'], 0, 10) . "</h3>";
       echo "<div class='button-container'>";
-      echo "<button><a href='https://api.whatsapp.com/send?phone=55[Telefone do Servidor]' class='whatsapp-button'>Contratar Serviço</a></button>";
+      echo "<button class='whatsapp-button'><a href='https://wa.me/{$row['telefone']}' target='_blank'>WhatsApp</a></button>";
       echo "</div>";
       echo "</div>";
       echo "</div>";
-      $cont++;
     }
 
     echo "</div>";
@@ -189,9 +200,5 @@
   // Fechar a conexão com o banco de dados
   mysqli_close($conexao);
   ?>
-
-  <!-- Adicione o link para a biblioteca Font Awesome -->
-  <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

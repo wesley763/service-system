@@ -64,6 +64,11 @@
       color: whitesmoke;
     }
 
+    .logo1 {
+      width: 300px;
+      height: 300px;
+  }
+
     /* Restante do código CSS... */
   </style>
 </head>
@@ -76,7 +81,7 @@
 
 
   <header class="header-wrapper">
-    <h1>Quali Serviços</h1>
+  <h1><img src="img\logo Grande.png" alt="Logo do Sistema" class="logo1"></h1>
     <h2>Divulgando para todos </h2>
     <div class="social-media">
       <!-- <a href="login.php" >Login</a> -->
@@ -86,12 +91,10 @@
   </header>
   <div class="container">
     <div class="card-container">
-      <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil,
-        culpa repudiandae atque facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil, culpa repudiandae atque
-        facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
+      <div class="card-text">O Quali Serviços é uma plataforma online que conecta prestadores
+         de serviços a clientes em busca de soluções profissionais. Nossa missão é facilitar
+          a vida das pessoas, proporcionando acesso a uma ampla variedade de serviços de qualidade,
+           desde assistência técnica e reformas, até consultorias e aulas particulares. 
       </div>
       <div class="card card1">
         <div class="card-wrapper">
@@ -108,22 +111,18 @@
           <p>Vem ver minha carreira profissional!</p>
         </div>
       </div>
-      <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil,
-        culpa repudiandae atque facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil, culpa repudiandae atque
-        facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
+      <div class="card-text">Com uma interface intuitiva e recursos avançados de busca, os usuários
+         podem encontrar facilmente os serviços desejados e entrar em contato direto com os prestadores. 
+         Acreditamos no poder da tecnologia para transformar a maneira como as pessoas contratam serviços, 
+         e estamos comprometidos em oferecer uma experiência confiável, conveniente e satisfatória para todos
+          os envolvidos
       </div>
     </div>
 
     <div class="card-container">
-      <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil,
-        culpa repudiandae atque facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis distinctio nihil, culpa repudiandae atque
-        facilis eveniet neque
-        consequuntur quas dolorem aliquam maiores nulla ullam optio fugit voluptatibus soluta? Nulla, ipsum.
+      <div class="card-text">Seja você um profissional em busca de novos clientes ou alguém em busca 
+        de uma solução profissional, o Quali Serviços está aqui para ajudar a conectar pessoas e promover 
+        o sucesso mútuo.
       </div>
       <div class="card card3 ">
         <div class="card-wrapper">
