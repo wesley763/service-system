@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $categoria_idcategoria = $_POST['categoria'];
     $descricao = $_POST['descricao'];
     $valor = $_POST['valor'];
-   
+
     // Verificar se o usuário está logado
     if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
         header('Location: login.php');
@@ -76,11 +76,66 @@ $categorias = mysqli_fetch_all($categorias_query, MYSQLI_ASSOC);
     <title>QUALISERVICE</title>
     <link rel="stylesheet" href="css/style_servidor.css" />
 </head>
+<style>
+    .navbar button a {
+        color: white;
+        text-decoration: none;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        color: black;
+        font-family: 'montserrat', sans-serif;
+    }
+
+    .navbar {
+        background-color: lightgrey;
+        padding: 20px;
+
+    }
+
+
+    .logo {
+        width: 250px;
+        padding-left: 20px;
+        margin-right: 10px;
+    }
+
+    .navbar button {
+        justify-content: end;
+        position: relative;
+        margin-left: auto;
+        text-decoration: none;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+
+    .navbar button:hover {
+        background-color: rgba(0, 0, 156, 0.91);
+        color: whitesmoke;
+    }
+</style>
 
 <body>
-    <header>
-        <!-- Cabeçalho -->
-    </header>
+
+    <nav class="navbar">
+        <img src="img\logo ret.png" alt="Logo" class="logo">
+
+        <div style="margin-left:auto ;">
+            <button><a href="inicio.php">Página Inicial</a></button>
+            <button><a href="sobre.php">Sobre</a></button>
+            <button onclick="showLogoutModal()">Sair</button>
+        </div>
+    </nav>
+
 
     <section>
         <!-- Conteúdo da seção -->
@@ -96,7 +151,8 @@ $categorias = mysqli_fetch_all($categorias_query, MYSQLI_ASSOC);
                         <select name="categoria" required>
                             <option value="">Selecione uma categoria:</option>
                             <?php foreach ($categorias as $categoria) { ?>
-                                <option value="<?php echo $categoria['idcategoria']; ?>"><?php echo $categoria['nome']; ?></option>
+                                <option value="<?php echo $categoria['idcategoria']; ?>"><?php echo $categoria['nome']; ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </div>

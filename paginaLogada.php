@@ -29,49 +29,48 @@ if (isset($_POST['logout'])) {
     header('Location: login.php');
     exit;
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
+
 <head>
     <title>Meus Serviços</title>
     <style>
-        /* Estilos para o cabeçalho */
-        @import url('https://fonts.googleapis.com/css2?family-Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            color: black;
+            font-family: 'montserrat', sans-serif;
         }
 
-        body {
-            overflow: hidden;
-        }
-
-        header {
-            background-color: #f1f1f1;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+        .navbar {
+    background-color: lightgrey;
+    padding: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    
+}
+        
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .navigation {
-            display: flex;
-        }
-
-        .navigation a {
+            width: 250px;
+            padding-left: 20px;
             margin-right: 10px;
-            text-decoration: none;
-            color: white;
         }
+
+
+
+
+
 
         h1 {
+            padding: 20px;
+            text-align: center;
+        }
+
+        P {
             text-align: center;
         }
 
@@ -101,20 +100,23 @@ if (isset($_POST['logout'])) {
             padding: 20px;
         }
 
-        header button {
-            display: block;
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            background-color: #007bff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+        .navbar button {
+    justify-content: end;
+    position: relative;
+    margin-left: auto;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
 
-        header button:hover {
+
+        .navbar button:hover {
             background-color: rgba(0, 0, 156, 0.91);
             color: whitesmoke;
         }
@@ -173,56 +175,45 @@ if (isset($_POST['logout'])) {
             color: whitesmoke;
         }
 
-        .modal button + button {
+        .modal button+button {
             margin-left: 10px;
         }
 
-                /* Estilos para o cabeçalho */
-                header {
+        /* Estilos para o cabeçalho */
+        header {
             background-color: #f1f1f1;
             padding: 5px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
-        .logo {
-            width: 150px;
-            /* Defina a largura da imagem */
-            height: 150px;
-            /* Mantém a proporção da imagem */
-        }
-
-        /* Restante do código CSS... */
     </style>
 
     </style>
 </head>
 
 <body>
-    <header>
-        <img src="img\logo Grande.png" alt="Logo" class="logo">
+    <nav class="navbar">
+        <img src="img\logo ret.png" alt="Logo" class="logo">
 
-        <nav class="navigation">
-            <button><a href="inicio.php">Página Inicial</a></button>
-            <button><a href="sobre.php">Sobre</a></button>
-            <button onclick="showLogoutModal()">Sair</button>
-        </nav>
-    </header>
 
-    <h1>Olá, <?php echo $nomeLogado; ?></h1>
-    <br> 
-    <br>   
-    <br> 
-    <br> 
-    <h1>Meus Serviços</h1>
+        <button><a href="inicio.php">Página Inicial</a></button>
+        <button><a href="sobre.php">Sobre</a></button>
+        <button onclick="showLogoutModal()">Sair</button>
+    </nav>
 
-    <br> 
-    <br> 
+    <h1>Olá,
+        <?php echo $nomeLogado; ?>
+    </h1>
+
+    <p>Seja bem vindo ao nosso sistema!</p>
+
+    <br>
+    <br>
 
     <button><a href="cadastro_service.php">Cadastrar Serviços</a></button>
-    <br> 
-    
+    <br>
+
     <button><a href="meus_servico.php">Ver Meus Serviços</a></button>
 
     <div id="logoutModal" class="modal">
@@ -249,4 +240,5 @@ if (isset($_POST['logout'])) {
         }
     </script>
 </body>
+
 </html>

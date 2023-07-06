@@ -1,22 +1,53 @@
 <html>
+
 <head>
   <title>SERVIÇOS</title>
 
   <style>
-    /* Estilos para o cabeçalho */
-    header {
-      background-color: #f1f1f1;
-      padding: 0px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .navbar button a {
+      color: white;
+      text-decoration: none;
     }
 
+    body {
+      margin: 0;
+      padding: 0;
+      color: black;
+      font-family: 'montserrat', sans-serif;
+    }
+
+    .navbar {
+      background-color: lightgrey;
+      padding: 20px;
+
+    }
+
+
     .logo {
-      width: 150px;
-      /* Defina a largura da imagem */
-      height: 150px;
-      /* Mantém a proporção da imagem */
+      width: 250px;
+      padding-left: 20px;
+      margin-right: 10px;
+    }
+
+    .navbar button {
+      justify-content: end;
+      position: relative;
+      margin-left: auto;
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+
+
+    .navbar button:hover {
+      background-color: rgba(0, 0, 156, 0.91);
+      color: whitesmoke;
     }
 
     #container {
@@ -75,6 +106,7 @@
       font-size: 16px;
       transition: background-color 0.3s ease;
     }
+
     .card1 button {
       display: block;
       text-align: center;
@@ -88,6 +120,7 @@
       font-size: 16px;
       transition: background-color 0.3s ease;
     }
+
     .card button:hover {
       background-color: #34B7F1;
     }
@@ -132,6 +165,7 @@
       justify-content: space-between;
       margin-top: 10px;
     }
+
     .delete-button {
       text-decoration: none;
       background-color: red;
@@ -139,17 +173,19 @@
       text-align: center;
       font-weight: 300;
     }
-
   </style>
 </head>
 
 <body>
-  <div class="search-container">
-    <input type="text" placeholder="Pesquisar...">
-    <div class="search-icon">
-      <i class="fas fa-search"></i>
+  <nav class="navbar">
+    <img src="img\logo ret.png" alt="Logo" class="logo">
+
+    <div style="margin-left:1200 ;">
+      <button><a href="inicio.php">Página Inicial</a></button>
+      <button><a href="sobre.php">Sobre</a></button>
+      <button onclick="showLogoutModal()">Sair</button>
     </div>
-  </div>
+  </nav>
 
   <?php
   // Iniciar a sessão
@@ -174,8 +210,8 @@
   $sql = "SELECT * FROM servidores as S  WHERE S.idservidores = $id_servidor_logado";
   $sql2 = "SELECT * FROM servico as S  WHERE S.servidores_idservidores = $id_servidor_logado";
 
-  $res=mysqli_query($conexao, $sql);
-  $teste=mysqli_fetch_array($res);
+  $res = mysqli_query($conexao, $sql);
+  $teste = mysqli_fetch_array($res);
 
 
   $resultado = mysqli_query($conexao, $sql);
@@ -194,7 +230,7 @@
       echo "<h3>Profissão: " . $teste[3] . "</h3>";
       echo "<div class='button-container'>";
       echo "<button><a href='editarServico.php?id=" . $row2['idservico'] . "' class='whatsapp-button'>Editar</a></button>";
-      echo "<button onclick='confirmDelete(" . $row2['idservico'] . ")' class='whatsapp-button delete-button'>Excluir</button>";
+      echo "<button onclick='confirmDelete(" . $row2['idservico'] . ")' class='delete-button'>Excluir</button>";
       echo "</div>";
       echo "</div>";
       echo "</div>";

@@ -1,17 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family-Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'montserrat', sans-serif;
 }
 
 body {
     overflow: inherit;
+    
 }
 
-/* Estilos para a barra de navegação */
 .navbar {
     background-color: lightgrey;
     padding: 20px;
@@ -20,7 +18,6 @@ body {
     align-items: center;
     
   }
-
   .logo {
     width: 250px;
     padding-left: 20px;
@@ -38,13 +35,6 @@ section {
 section .color {
     position: absolute;
     filter: blur(150px);
-}
-
-section .color:nth-child(1) {
-    top: -350px;
-    width: 600px;
-    height: 600px;
-    background: white;
 }
 
 section .color:nth-child(2) {
@@ -209,6 +199,7 @@ section .color:nth-child(3) {
     font-weight: 600;
 }
 
+
 .forget {
     text-align: center;
     margin-top: 5px;
@@ -234,4 +225,36 @@ section .color:nth-child(3) {
     justify-content: center;
     align-items: center;
     color: white;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    width: 50%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
